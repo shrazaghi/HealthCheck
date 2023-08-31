@@ -1,5 +1,6 @@
 global using HealthCheckAPI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using WorldCitiesAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+//builder.Services.AddControllers().AddJsonOptions(option =>
+//{
+//    option.JsonSerializerOptions.WriteIndented = true;
+//    option.JsonSerializerOptions.PropertyNamingPolicy = null;
+//});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
