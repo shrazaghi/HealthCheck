@@ -6,6 +6,7 @@ import { HealthCheckComponent } from './health-check/health-check.component';
 
 import { CitiesComponent } from './cities/cities.component'
 import { CountriesComponent } from './countries/countries.component';
+import { CityEditComponent } from './cities/city-edit.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'fetch-data', component: FetchDataComponent },
   { path: 'health-check', component: HealthCheckComponent },
   { path: 'cities', component: CitiesComponent },
+  { path: 'city/:id', component: CityEditComponent },
   { path: 'countries', component: CountriesComponent }
 ];
 @NgModule({
