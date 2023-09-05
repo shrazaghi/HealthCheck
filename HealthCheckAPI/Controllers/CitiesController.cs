@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCheckAPI.Data.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace HealthCheckAPI.Controllers
 
         // GET: api/Cities
         [HttpGet]
-        public async Task<ActionResult<ApiResult<City>>> GetCities(
+        public async Task<ActionResult<ApiResult<CityDTO>>> GetCities(
             int pageIndex = 0,
             int pageSize = 10,
             string? sortColumn = null,
@@ -31,8 +32,16 @@ namespace HealthCheckAPI.Controllers
             string? filterColumn = null,
             string? filterQuery = null)
         {
-            return await ApiResult<City>.CreateAsync(
-                _context.Cities,
+            return await ApiResult<CityDTO>.CreateAsync(
+                _context.Cities.Select(city => new CityDTO
+                {
+                    Id = city.Id,
+                    Name = city.Name,
+                    Lat = city.Lat,
+                    Lon = city.Lon,
+                    CountryId = city.CountryId,
+                    CountryName = city.Country.Name
+                }),
                 pageIndex,
                 pageSize,
                 sortColumn,
