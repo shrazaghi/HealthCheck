@@ -6,22 +6,23 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 export abstract class BaseFormComponent {
   // the form model
   form!: FormGroup;
-  
+
   getErrors(
     control: AbstractControl,
     displayName: string,
+    customMessages: { [key: string]: string } | null = null
   ): string[] {
     var errors: string[] = [];
     Object.keys(control.errors || {}).forEach((key) => {
       switch (key) {
         case 'required':
-          errors.push(`${displayName} is required.`);
+          errors.push(`${displayName} ${customMessages?.[key] ?? "is required"}.`);
           break;
         case 'pattern':
-          errors.push(`${displayName} contains invalid characters.`);
+          errors.push(`${displayName} ${customMessages?.[key] ?? "contains invalid characters"}.`);
           break;
         case 'isDupeField':
-          errors.push(`${displayName} already exists: please choose another.`);
+          errors.push(`${displayName} ${customMessages?.[key] ?? "already exists: please choose another"}.`);
           break;
         default:
           errors.push(`${displayName} is invalid.`);
