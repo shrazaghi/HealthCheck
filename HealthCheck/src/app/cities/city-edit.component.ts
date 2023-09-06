@@ -26,8 +26,9 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
   // It's NULL when we're adding a new city,
   // and not NULL when we're editing an existing one.
   id?: number;
-  // the countries array for the select
-  countries?: Country[];
+
+  // the countries observable for the select (using async pipe)
+  countries?: Observable<Country[]>;
 
   // Activity Log (for debugging purposes)
   activityLog: string = '';
@@ -106,18 +107,18 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
       this.title = "Create a new City";
     }
   }
+
   loadCountries() {
     // fetch all the countries from the server
-    this.cityService.getCountries(
-      0,
-      9999,
-      "name",
-      "asc",
-      null,
-      null,
-    ).subscribe(result => {
-      this.countries = result.data;
-    }, error => console.error(error));
+    this.countries = this.cityService
+      .getCountries(
+        0,
+        9999,
+        "name",
+        "asc",
+        null,
+        null,
+      ).pipe(map(x => x.data));
   }
 
   onSubmit() {
