@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { City } from './city';
@@ -31,6 +31,7 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
 
   // Activity Log (for debugging purposes)
   activityLog: string = '';
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,7 +55,7 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
 
 
     // react to form changes
-    this.form.valueChanges
+    this.subscriptions.add(this.form.valueChanges
       .subscribe(() => {
         if (!this.form.dirty) {
           this.log("Form Model has been loaded.");
@@ -62,12 +63,12 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
         else {
           this.log("Form was updated by the user.");
         }
-      });
+      }));
 
     this.loadData();
 
     // react to changes in the form.name control
-    this.form.get("name")!.valueChanges
+    this.subscriptions.add(this.form.get("name")!.valueChanges
       .subscribe(() => {
         if (!this.form.dirty) {
           this.log("Name has been loaded with initial values.");
@@ -75,7 +76,7 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
         else {
           this.log("Name was updated by the user.");
         }
-      });
+      }));
   }
 
   log(str: string) {
@@ -165,5 +166,9 @@ export class CityEditComponent extends BaseFormComponent implements OnInit {
         return (result ? { isDupeCity: true } : null);
       }));
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
