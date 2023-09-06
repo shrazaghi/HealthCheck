@@ -16,10 +16,13 @@ namespace HealthCheckAPI.Controllers
     public class CountriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        public ILogger<CountriesController> Logger { get; set; }
 
-        public CountriesController(ApplicationDbContext context)
+        public CountriesController(ApplicationDbContext context, ILogger<CountriesController> logger)
         {
             _context = context;
+            Logger = logger;
+            Logger.LogInformation("SampleController initialized.");
         }
 
         // GET: api/Countries
