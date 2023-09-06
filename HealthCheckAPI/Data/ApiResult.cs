@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using EFCore.BulkExtensions;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
 using System.Linq.Dynamic.Core;
@@ -57,6 +58,8 @@ namespace WorldCitiesAPI.Data
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize);
 
+            // retrieve the SQL query (for debug purposes)
+            var sql = source.ToParametrizedSql();
             var data = await source.ToListAsync();
             return new ApiResult<T>(data, count, pageIndex, pageSize, sortColumn, sortOrder, filterColumn, filterQuery);
         }
