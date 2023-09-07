@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HealthCheckAPI.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using WorldCitiesAPI.Data.Models;
 
 namespace WorldCitiesAPI.Data
 {
-    public class ApplicationDbContext : DbContext, IDesignTimeDbContextFactory<ApplicationDbContext>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>,
+        IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext() : base() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
