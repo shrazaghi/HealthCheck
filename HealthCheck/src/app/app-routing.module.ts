@@ -11,16 +11,15 @@ import { CountryEditComponent } from './countries/country-edit.component';
 import { LoginComponent } from './auth/login.component';
 
 
+import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'fetch-data', component: FetchDataComponent },
-  { path: 'health-check', component: HealthCheckComponent },
   { path: 'cities', component: CitiesComponent },
-  { path: 'city', component: CityEditComponent },
-  { path: 'city/:id', component: CityEditComponent },
+  { path: 'city/:id', component: CityEditComponent, canActivate: [AuthGuard] },
+  { path: 'city', component: CityEditComponent, canActivate: [AuthGuard] },
   { path: 'countries', component: CountriesComponent },
-  { path: 'country/:id', component: CountryEditComponent },
-  { path: 'country', component: CountryEditComponent },
+  { path: 'country/:id', component: CountryEditComponent, canActivate: [AuthGuard] },
+  { path: 'country', component: CountryEditComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent }
 ];
 @NgModule({
