@@ -9,6 +9,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
 using WorldCitiesAPI.Data;
+using WorldCitiesAPI.Data.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +91,13 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddScoped<JwtHandler>();
 
+builder.Services.AddGraphQLServer()
+    .AddAuthorization()
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
+    .AddFiltering()
+    .AddSorting();
+
 var app = builder.Build();
 
 app.UseSerilogRequestLogging();
@@ -112,6 +120,7 @@ app.UseCors("AngularPolicy");
 app.UseHealthChecks(new PathString("/api/health"), new CustomHealthCheckOptions());
 
 app.MapControllers();
+app.MapGraphQL("/api/graphql");
 app.MapMethods("/api/heartbeat", new[] { "HEAD" }, () => Results.Ok());
 
 app.Run();

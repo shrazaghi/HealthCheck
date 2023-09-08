@@ -11,12 +11,15 @@ namespace HealthCheckAPI.Data.DTO
         public int Id { get; set; }
 
         [JsonPropertyName("name")]
+        [GraphQLName("name")]
         public string Name { get; set; } = null!;
         
         [JsonPropertyName("lat")]
+        [GraphQLName("lat")]
         public decimal Lat { get; set; }
         
         [JsonPropertyName("lon")]
+        [GraphQLName("lon")]
         public decimal Lon { get; set; }
 
         public int CountryId { get; set; }

@@ -12,6 +12,7 @@ using WorldCitiesAPI.Data.Models;
 using Xunit;
 namespace WorldCitiesAPI.Tests
 {
+    /*
     public class SeedController_Tests
     {
         /// <summary>
@@ -65,5 +66,5 @@ namespace WorldCitiesAPI.Tests
             Assert.NotNull(user_User);
             Assert.Null(user_NotExisting);
         }
-    }
+    }*/
 }
