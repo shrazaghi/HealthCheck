@@ -14,6 +14,7 @@ import { LoginComponent } from './auth/login.component';
 import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: "health-check", component: HealthCheckComponent },
   { path: 'cities', component: CitiesComponent },
   { path: 'city/:id', component: CityEditComponent, canActivate: [AuthGuard] },
   { path: 'city', component: CityEditComponent, canActivate: [AuthGuard] },
