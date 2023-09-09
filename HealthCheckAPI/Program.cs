@@ -2,6 +2,7 @@ global using HealthCheckAPI;
 using HealthCheckAPI.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -47,6 +48,10 @@ builder.Services.AddCors(options =>
         cfg.AllowAnyMethod();
         cfg.WithOrigins(builder.Configuration["AllowedCORS"]);
     }));
+
+
+builder.Services.AddSignalR();
+
 
 // Add ApplicationDbContext and SQL Server support
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -122,5 +127,12 @@ app.UseHealthChecks(new PathString("/api/health"), new CustomHealthCheckOptions(
 app.MapControllers();
 app.MapGraphQL("/api/graphql");
 app.MapMethods("/api/heartbeat", new[] { "HEAD" }, () => Results.Ok());
+app.MapHub<HealthCheckHub>("/api/health-hub");
+
+app.MapGet("/api/broadcast/update2", async (IHubContext<HealthCheckHub> hub) =>
+{
+    await hub.Clients.All.SendAsync("Update", "test");
+    return Results.Text("Update message sent.");
+});
 
 app.Run();
