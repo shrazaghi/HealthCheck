@@ -14,6 +14,7 @@ import { LoginComponent } from './auth/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TemperatureConverterComponent } from './temperature-converter/temperature-converter.component';
 import { TextRepeaterComponent } from './text-repeater/text-repeater.component';
+import { TempConvApiReactComponent } from './temp-conv-api-react/temp-conv-api-react.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: "health-check", component: HealthCheckComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'country', component: CountryEditComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'tempconv', component: TemperatureConverterComponent },
-  { path: 'textrepeater', component: TextRepeaterComponent }
+  { path: 'textrepeater', component: TextRepeaterComponent },
+  { path: 'tca-react', component: TempConvApiReactComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -28,6 +28,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { TemperatureConverterComponent } from './temperature-converter/temperature-converter.component';
 import { TextRepeaterComponent } from './text-repeater/text-repeater.component';
+import { TempConvApiReactComponent } from './temp-conv-api-react/temp-conv-api-react.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TextRepeaterComponent } from './text-repeater/text-repeater.component';
     CountryEditComponent,
     LoginComponent,
     TemperatureConverterComponent,
-    TextRepeaterComponent
+    TextRepeaterComponent,
+    TempConvApiReactComponent
   ],
   imports: [
     BrowserModule,
