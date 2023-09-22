@@ -1,0 +1,13 @@
+<p>temperature-converter works!</p>
+
+<!-- import FromsModeule from @angular/form in app.module.ts to use [(ngModel)] -->
+<section class="layout-row align-items-center justify-content-between">
+    <label> Celcius:</label>
+    <input [(ngModel)]="clecius" type="number" title="Celcius" placeholder="input celcius" (keyup)="celciusChanged()" />
+</section>
+
+<section class="layout-row align-items-center justify-content-between">
+    <label> Fahrenheit:</label>
+    <input [(ngModel)]="fahrenheit" type="number" title="Fahrenheit" placeholder="input fahrenheit"
+        (keyup)="fahrenheitChanged()">
+</section>

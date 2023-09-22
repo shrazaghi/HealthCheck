@@ -12,6 +12,8 @@ import { LoginComponent } from './auth/login.component';
 
 
 import { AuthGuard } from './auth/auth.guard';
+import { TemperatureConverterComponent } from './temperature-converter/temperature-converter.component';
+import { TextRepeaterComponent } from './text-repeater/text-repeater.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: "health-check", component: HealthCheckComponent },
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'countries', component: CountriesComponent },
   { path: 'country/:id', component: CountryEditComponent, canActivate: [AuthGuard] },
   { path: 'country', component: CountryEditComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'tempconv', component: TemperatureConverterComponent },
+  { path: 'textrepeater', component: TextRepeaterComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

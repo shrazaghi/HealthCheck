@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +26,8 @@ import { ConnectionServiceModule, ConnectionServiceOptions, ConnectionServiceOpt
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
+import { TemperatureConverterComponent } from './temperature-converter/temperature-converter.component';
+import { TextRepeaterComponent } from './text-repeater/text-repeater.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,15 @@ import { InMemoryCache } from '@apollo/client/core';
     CountriesComponent,
     CityEditComponent,
     CountryEditComponent,
-    LoginComponent
+    LoginComponent,
+    TemperatureConverterComponent,
+    TextRepeaterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     ReactiveFormsModule,

@@ -1,0 +1,30 @@
+<p>text-repeater works!</p>
+
+<section>
+    <mat-label>Text</mat-label>
+    <!-- <mat-input [(ngModel)]="inputText" placeholder="Input Text" /> -->
+    <input [(ngModel)]="inputText" placeholder="Input Text" />
+    <mat-label>Count</mat-label>
+    <!-- <mat-input [(ngModel)]="inputText" placeholder="Input Text" /> -->
+    <input [(ngModel)]="count" type="number" placeholder="count" />
+    <button (click)="writeIt()">Write It!.</button>
+</section>
+
+<table mat-table [hidden]="!writeList" [dataSource]="writeList">
+    <!-- Index Definition -->
+    <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.index}} </mat-cell>
+    </ng-container>
+
+    <!-- Age Definition -->
+    <ng-container matColumnDef="text">
+        <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.text}} </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="['index', 'text']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['index', 'text']"></mat-row>
+
+</table>
